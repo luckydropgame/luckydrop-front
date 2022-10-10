@@ -1,0 +1,58 @@
+.marquee_box {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  word-break: keep-all;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+}
+
+.marquee_box p {
+  display: inline-block;
+  transition-timing-function: linear;
+}
+
+.marquee_box:hover p {
+  animation-play-state: paused;
+  cursor: default;
+}
+
+tbody tr td, thead tr th {
+  border:none !important;
+  color: #fff !important;
+  text-align: center !important;
+}
+thead tr th {
+  font-size: 1rem !important;
+}
+
+tbody tr td:first-child, thead tr th:first-child {
+  text-align: left !important;
+}
+
+tbody tr, thead tr {
+  position: relative;
+}
+
+tbody tr:before {
+  content: ' ';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: url('/tbody-line.png') no-repeat;
+  background-size: 100%;
+}
+
+thead tr:before {
+  content: ' ';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: url('/thead-line.png') no-repeat;
+  background-size: 100%;
+}
