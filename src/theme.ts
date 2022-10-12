@@ -12,6 +12,12 @@ const theme: MantineThemeOverride = {
 
 export const useSiteStyles = createStyles((theme) => {
   return {
+    basicBg: {
+      position: "absolute",
+      width: "25vw",
+      left: "4vw",
+      top: "20px",
+    },
     heroTitle: {
       fontSize: "1.875rem",
       lineHeight: "1",
@@ -200,30 +206,16 @@ export const useSiteStyles = createStyles((theme) => {
 export const useBetStyles = createStyles(() => {
   return {
     basicBg: {
-      position: 'absolute',
-      width: '30vw',
-      left: '4vw',
-      top: '86px',
-    },
-    valueWrap: {
-      width: "84vw",
-    },
-    title: {
-      fontSize: "1.6rem",
-      fontFamily: "inherit",
-      lineHeight: 1,
-    },
-    value: {
-      fontSize: "3.12rem",
-      fontFamily: "inherit",
-      lineHeight: 1,
+      position: "absolute",
+      width: "30vw",
+      left: "4vw",
+      top: "86px",
     },
     bannerWrap: {
-      background: "url('/bg.png') no-repeat",
-      backgroundPosition: "left top",
-      backgroundSize: "30%",
-      paddingTop: "92px",
-      paddingBottom: "65px",
+      paddingTop: "20px",
+      paddingBottom: "70px",
+      position: "relative",
+      zIndex: 2,
     },
     betImg: {
       cursor: "pointer",
@@ -236,27 +228,27 @@ export const useBetStyles = createStyles(() => {
     },
     logWrap: {
       paddingTop: "52px",
-      position: 'relative',
-      backgroundColor: theme.colors.bg[1]
+      position: "relative",
+      backgroundColor: theme.colors.bg[1],
     },
     logContent: {
       width: "74vw",
     },
     tableWrap: {
-      width: '100%',
-      position: 'relative'
+      width: "100%",
+      position: "relative",
     },
     tableBox: {
       width: "74vw",
-      backgroundColor: 'rgba(54, 16, 95, 0.5)',
+      backgroundColor: "rgba(54, 16, 95, 0.5)",
       borderRadius: "5px",
       border: "1px solid #0ddded",
       boxShadow: "0 0 10px #0ddded",
       margin: "25px 0 5px",
     },
     footBall: {
-      width: '28.3vw',
-      position: 'absolute',
+      width: "28.3vw",
+      position: "absolute",
       bottom: 0,
       left: 0,
     },
@@ -265,5 +257,153 @@ export const useBetStyles = createStyles(() => {
     },
   };
 });
+
+export const useGameStyles = createStyles(() => {
+  return {
+    basicBg: {
+      position: "absolute",
+      width: "25vw",
+      left: "4vw",
+      top: "20px",
+    },
+    bannerWrap: {
+      paddingTop: "92px",
+      paddingBottom: "70px",
+      position: "relative",
+      zIndex: 2,
+    },
+    gameImg: {
+      width: "150px",
+      height: "150px",
+      cursor: "pointer",
+      "&:hover": {
+        boxShadow: "3px 2px 3px 0px rgba(242, 128, 6, 0.71)",
+      },
+    },
+    logWrap: {
+      paddingTop: "52px",
+      position: "relative",
+      backgroundColor: theme.colors.bg[1],
+    },
+    logContent: {
+      width: "74vw",
+    },
+    tableWrap: {
+      width: "100%",
+      position: "relative",
+    },
+    tableBox: {
+      width: "74vw",
+      backgroundColor: "rgba(54, 16, 95, 0.5)",
+      borderRadius: "5px",
+      border: "1px solid #0ddded",
+      boxShadow: "0 0 10px #0ddded",
+      margin: "25px 0 5px",
+    },
+    footBall: {
+      width: "28.3vw",
+      position: "absolute",
+      bottom: 0,
+      left: 0,
+    },
+    pageWrap: {
+      padding: "25px 0",
+    },
+  };
+});
+
+export const useUncomingStyles = createStyles(() => {
+  return {
+    basicBg: {
+      position: "absolute",
+      width: "25vw",
+      left: "4vw",
+      top: "20px",
+    },
+    bannerWrap: {
+      paddingTop: "92px",
+      position: "relative",
+      zIndex: 2,
+    },
+    logWrap: {
+      paddingTop: "52px",
+      position: "relative",
+      top: "-60px",
+      backgroundColor: theme.colors.bg[1],
+    },
+    logContent: {
+      width: "74vw",
+    },
+    tableWrap: {
+      width: "100%",
+      position: "relative",
+    },
+    tableBox: {
+      width: "74vw",
+      backgroundColor: "rgba(54, 16, 95, 0.5)",
+      borderRadius: "5px",
+      border: "1px solid #0ddded",
+      boxShadow: "0 0 10px #0ddded",
+      margin: "25px 0 5px",
+    },
+    footBall: {
+      width: "28.3vw",
+      position: "absolute",
+      bottom: 0,
+      left: 0,
+    },
+    pageWrap: {
+      padding: "25px 0",
+    },
+  };
+});
+
+export const useDetailStyles = createStyles(() => {
+  return {
+    bannerWrap: {
+      paddingTop: "20px",
+      position: "relative",
+      zIndex: 2,
+      paddingBottom: "30px",
+      color: "#f7fafb",
+    },
+    betDetailWrap: {
+      width: "80vw",
+      backgroundColor: "#1f1e59",
+      borderRadius: "5px",
+      padding: "30px",
+    },
+    chooseButton: {
+      width: "174px",
+      height: "50px",
+      background: "#6223a6",
+      borderRadius: "2px",
+      "&:hover, &:active": {
+        background:
+          "-webkit-gradient(linear,0% 4%, 0% 100%, from(#EA861A), to(#F53B19))",
+      },
+    },
+    mainButton: {
+      width: "200px",
+      height: "54px",
+      borderRadius: '54px',
+      background:
+        "-webkit-gradient(linear,0% 4%, 0% 100%, from(#EA861A), to(#F53B19))",
+      "&:hover, &:active": {
+        background:
+          "-webkit-gradient(linear,0% 0%, 0% 50%, from(#EC7E16), to(#F53A19))",
+          boxShadow: '0px 0px 10px #ED7B17'
+      },
+    },
+  };
+});
+
+export const useClaimStyles = createStyles(() => {
+  return {
+    bannerWrap: {
+      padding: '90px 0'
+    }
+  }
+})
 
 export default theme;

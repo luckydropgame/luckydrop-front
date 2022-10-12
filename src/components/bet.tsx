@@ -13,22 +13,41 @@ import { NextPage } from "next";
 import { Tweet } from "src/types";
 import StyledTabs from "./StyledTabs";
 import { useBetStyles } from "src/theme";
+import TotalAwardPool from "./TotalAwardPool";
+import Link from "next/link";
+
+const betItemList = [
+  {
+    id: 1,
+    url: "/bet/list",
+  },
+  {
+    id: 2,
+    url: "/uncoming",
+  },
+  {
+    id: 3,
+    url: "/uncoming",
+  },
+  {
+    id: 4,
+    url: "/uncoming",
+  },
+  {
+    id: 5,
+    url: "/uncoming",
+  },
+  {
+    id: 6,
+    url: "/uncoming",
+  },
+];
 
 const Banner = () => {
   const { classes } = useBetStyles();
   return (
     <Stack align="center" className={classes.bannerWrap} spacing={48}>
-      <Stack align="center" className={classes.valueWrap} spacing={36}>
-        <Text color="white" className={classes.title}>
-          THE TOTAL REWAED POOL
-        </Text>
-        <Text color="#fa8a04" className={classes.value}>
-          $ 1,000,356,586,069
-        </Text>
-        <Center className={classes.line}>
-          <MImage src="/line.png"></MImage>
-        </Center>
-      </Stack>
+      <TotalAwardPool title="THE TOTAL REWAED POOL" value="$ 1,000,356,586,069" />
       <SimpleGrid
         sx={() => ({
           width: "57vw",
@@ -36,24 +55,15 @@ const Banner = () => {
         cols={3}
         spacing={30}
       >
-        <Center className={classes.betImg}>
-          <MImage src="/bet/1.png"></MImage>
-        </Center>
-        <Center className={classes.betImg}>
-          <MImage src="/bet/2.png"></MImage>
-        </Center>
-        <Center className={classes.betImg}>
-          <MImage src="/bet/3.png"></MImage>
-        </Center>
-        <Center className={classes.betImg}>
-          <MImage src="/bet/4.png"></MImage>
-        </Center>
-        <Center className={classes.betImg}>
-          <MImage src="/bet/5.png"></MImage>
-        </Center>
-        <Center className={classes.betImg}>
-          <MImage src="/bet/6.png"></MImage>
-        </Center>
+        {betItemList.map((item, index) => {
+          return (
+            <Link href={item.url}>
+              <Center key={`item_${index}`} className={classes.betImg}>
+                <MImage src={`/bet/${item.id}.png`}></MImage>
+              </Center>
+            </Link>
+          );
+        })}
       </SimpleGrid>
     </Stack>
   );

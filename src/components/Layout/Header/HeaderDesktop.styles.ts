@@ -23,7 +23,6 @@ export default createStyles(theme => ({
 
   logo: {
     paddingRight: theme.spacing.md,
-    paddingLeft: theme.spacing.md,
     height: HEADER_HEIGHT,
     paddingTop: 6,
     display: 'flex',

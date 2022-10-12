@@ -6,7 +6,7 @@ export function GlobalStyles() {
         {
           "@font-face": {
             fontFamily: "sc-regular",
-            src: `url('/SourceHanSansSC-Regular1.otf') format("opentype")`,
+            src: `url('/SourceHanSansSC-Regular.otf') format("opentype")`,
             fontWeight: 400,
             fontStyle: "normal",
           },
