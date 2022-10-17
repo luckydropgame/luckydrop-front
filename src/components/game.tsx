@@ -16,14 +16,14 @@ import StyledTabs from "./StyledTabs";
 import { useGameStyles } from "src/theme";
 import TotalAwardPool from "./TotalAwardPool";
 
-const Banner = () => {
+const Banner = ({ totalAward }) => {
   const { classes } = useGameStyles();
   return (
     <Stack align="center" className={classes.bannerWrap} spacing={48}>
       <Center className={classes.basicBg}>
         <MImage src="/bg.png"></MImage>
       </Center>
-      <TotalAwardPool title="THE TOTAL REWAED POOL" value="$ 1,000,356,586,069" />
+      <TotalAwardPool title="THE TOTAL REWAED POOL" value={`$ ${totalAward}`} />
       <Stack
         align="center"
         spacing={25}
@@ -54,18 +54,18 @@ const Banner = () => {
               <Center className={classes.gameImg}>
                 <MImage src="/game/game2.png"></MImage>
               </Center>
-              <Text size="1rem">Game</Text>
-              <Text size="1.45rem">Dice</Text>
             </Link>
+            <Text size="1rem">Game</Text>
+            <Text size="1.45rem">Dice</Text>
           </Stack>
           <Stack align="center" spacing={26}>
             <Link href="/uncoming">
               <Center className={classes.gameImg}>
                 <MImage src="/game/game3.png"></MImage>
               </Center>
-              <Text size="1rem">Game</Text>
-              <Text size="1.45rem">Bankroll</Text>
             </Link>
+            <Text size="1rem">Game</Text>
+            <Text size="1.45rem">Bankroll</Text>
           </Stack>
         </Group>
       </Stack>
@@ -185,13 +185,11 @@ const Log = () => {
 };
 
 const GamePage: NextPage<{
-  tweets: Tweet[];
-  avatars: Array<{ avatar: string }>;
-  count: number;
-}> = ({ tweets, avatars, count }) => {
+  totalAward: string;
+}> = ({ totalAward }) => {
   return (
     <div className="container">
-      <Banner />
+      <Banner totalAward={totalAward} />
       <Log />
       <style jsx>{`
         .container {

@@ -11,13 +11,18 @@
     "@mantine/core": "^5.1.6",
     "@mantine/hooks": "^5.1.6",
     "@mantine/next": "^5.1.6",
+    "@rainbow-me/rainbowkit": "^0.7.1",
     "@tabler/icons": "^1.86.0",
+    "ethers": "^5.7.1",
     "next": "^12.2.5",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-helmet": "^6.1.0",
     "react-photo-album": "^1.16.1",
-    "twitter-api-sdk": "^1.1.0"
+    "twitter-api-sdk": "^1.1.0",
+    "wagmi": "^0.6.8",
+    "web3": "^1.8.0",
+    "web3-utils": "^1.8.0"
   },
   "devDependencies": {
     "@babel/core": "^7.18.13",

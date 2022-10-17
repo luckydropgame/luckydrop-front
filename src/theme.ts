@@ -378,7 +378,7 @@ export const useDetailStyles = createStyles(() => {
       height: "50px",
       background: "#6223a6",
       borderRadius: "2px",
-      "&:hover, &:active": {
+      "&:hover": {
         background:
           "-webkit-gradient(linear,0% 4%, 0% 100%, from(#EA861A), to(#F53B19))",
       },

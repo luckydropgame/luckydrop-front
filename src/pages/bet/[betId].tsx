@@ -1,18 +1,20 @@
-import { NextPageContext } from "next";
-import Detail from "src/components/detail";
+import { NextPageContext } from 'next'
+import BetList from 'src/components/list'
+import { Tweet } from 'src/types'
 
-export const getServerSideProps = async ({ res, query }: NextPageContext) => {
-  let tweet: any = {};
+export const getServerSideProps = async ({ res, req }: NextPageContext) => {
+  let tweets: Tweet[] = []
 
   res.setHeader(
-    "Cache-Control",
-    "public, s-maxage=10, stale-while-revalidate=59"
-  );
+    'Cache-Control',
+    'public, s-maxage=10, stale-while-revalidate=59'
+  )
 
   return {
     props: {
-      detail: tweet,
+      tweets: tweets.filter(t => t.medias.length),
     },
-  };
-};
-export default Detail;
+  }
+}
+
+export default BetList

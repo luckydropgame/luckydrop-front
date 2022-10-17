@@ -1,6 +1,5 @@
 import {
   Stack,
-  Text,
   Tabs,
   Center,
   Image as MImage,
@@ -15,11 +14,17 @@ import StyledTabs from "./StyledTabs";
 import { useBetStyles } from "src/theme";
 import TotalAwardPool from "./TotalAwardPool";
 import Link from "next/link";
+import { formatNumber } from "../common/utils";
+
+import abi from "src/abi/abi.json";
+import { useContractRead } from "wagmi";
+import { useEffect, useState } from "react";
+import { AppProps } from "next/app";
 
 const betItemList = [
   {
     id: 1,
-    url: "/bet/list",
+    url: "/bet/1",
   },
   {
     id: 2,
@@ -43,11 +48,11 @@ const betItemList = [
   },
 ];
 
-const Banner = () => {
+const Banner = ({ totalAward }) => {
   const { classes } = useBetStyles();
   return (
     <Stack align="center" className={classes.bannerWrap} spacing={48}>
-      <TotalAwardPool title="THE TOTAL REWAED POOL" value="$ 1,000,356,586,069" />
+      <TotalAwardPool title="THE TOTAL REWAED POOL" value={`$ ${totalAward}`} />
       <SimpleGrid
         sx={() => ({
           width: "57vw",
@@ -57,7 +62,7 @@ const Banner = () => {
       >
         {betItemList.map((item, index) => {
           return (
-            <Link href={item.url}>
+            <Link key={`item_${index}`} href={item.url}>
               <Center key={`item_${index}`} className={classes.betImg}>
                 <MImage src={`/bet/${item.id}.png`}></MImage>
               </Center>
@@ -81,35 +86,35 @@ const Log = () => {
       position: 58,
       mass: 140.12,
       symbol: "Ce",
-      name: "Cerium",
+      name: "321",
       visible: false,
     },
     {
       position: 58,
       mass: 140.12,
       symbol: "Ce",
-      name: "Cerium",
+      name: "456",
       visible: false,
     },
     {
       position: 58,
       mass: 140.12,
       symbol: "Ce",
-      name: "Cerium",
+      name: "789",
       visible: false,
     },
     {
       position: 58,
       mass: 140.12,
       symbol: "Ce",
-      name: "Cerium",
+      name: "012",
       visible: false,
     },
     {
       position: 58,
       mass: 140.12,
       symbol: "Ce",
-      name: "Cerium",
+      name: "hahh",
       visible: false,
     },
   ];
@@ -181,13 +186,11 @@ const Log = () => {
 };
 
 const BetPage: NextPage<{
-  tweets: Tweet[];
-  avatars: Array<{ avatar: string }>;
-  count: number;
-}> = ({ tweets, avatars, count }) => {
+  totalAward: string;
+}> = ({ totalAward }) => {
   return (
     <div className="container">
-      <Banner />
+      <Banner totalAward={totalAward} />
       <Log />
       <style jsx>{`
         .container {

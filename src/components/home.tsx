@@ -12,15 +12,20 @@ import {
 } from "@mantine/core";
 import Link from "next/link";
 import { NextPage } from "next";
+import { ethers } from "ethers";
 import { Tweet } from "src/types";
 import TextScroll from "./TextScroll";
+import abi from "src/abi/abi.json";
+import { useContractRead } from "wagmi";
 import StyledTabs from "./StyledTabs/index";
 import { useSiteStyles } from "src/theme";
 import { useMediaQuery } from "@mantine/hooks";
 import { becomeSponsorUrl, joinTwitterUrl } from "../common/constants";
+import { useEffect, useState } from "react";
 
 const Banner = () => {
   const { classes } = useSiteStyles();
+
   return (
     <Stack className={classes.bannerWrap}>
       <Stack className={classes.bannerTitle}>
@@ -94,6 +99,7 @@ const FIFA = ({ info = [] }) => {
   for (let i = 0; i < 40; i++) {
     text = text + " " + "UNCOMING...";
   }
+
   return (
     <Stack spacing={0} className={classes.fifaWrap}>
       <div className={classes.scrollBar}>
@@ -121,26 +127,36 @@ const FIFA = ({ info = [] }) => {
 
             <Tabs.Panel value="fifa" pt={40} pb={60}>
               <SimpleGrid cols={4} spacing={24}>
-                <Card className={classes.fifaItem}>
-                  <Stack align="center">
-                    <Group position="center">
-                      <Center className={classes.fifaFlag}>
-                        <MImage src="/home/fifa/flag-1.png"></MImage>
-                      </Center>
-                      <Text>VS</Text>
-                      <Center className={classes.fifaFlag}>
-                        <MImage src="/home/fifa/flag-2.png"></MImage>
-                      </Center>
-                    </Group>
-                    <Text>2022/11/25 08:00</Text>
-                    <UnstyledButton
-                      className={classes.fifaJoin}
-                    ></UnstyledButton>
-                  </Stack>
-                </Card>
-                <Card className={classes.fifaItem}></Card>
-                <Card className={classes.fifaItem}></Card>
-                <Card className={classes.fifaItem}></Card>
+                {info.map((item, index) => {
+                  return (
+                    <Card
+                      key={`fifaitem_${index}`}
+                      className={classes.fifaItem}
+                    >
+                      <Stack align="center">
+                        <Group position="center">
+                          <Center className={classes.fifaFlag}>
+                            <MImage
+                              src={`https://cloudinary.fifa.com/api/v3/picture/flags-sq-2/${item[3]}`}
+                            ></MImage>
+                          </Center>
+                          <Text>VS</Text>
+                          <Center className={classes.fifaFlag}>
+                            <MImage
+                              src={`https://cloudinary.fifa.com/api/v3/picture/flags-sq-2/${item[4]}`}
+                            ></MImage>
+                          </Center>
+                        </Group>
+                        <Text>2022/11/25 08:00</Text>
+                        <Link href={`/bet/1/${item[7]}`}>
+                          <UnstyledButton
+                            className={classes.fifaJoin}
+                          ></UnstyledButton>
+                        </Link>
+                      </Stack>
+                    </Card>
+                  );
+                })}
               </SimpleGrid>
             </Tabs.Panel>
 
@@ -318,15 +334,58 @@ const Partners = () => {
   );
 };
 
+const getGameId = () => {
+  const { data } = useContractRead({
+    addressOrName: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
+    contractInterface: abi,
+    functionName: "getGameIds",
+  });
+  if (data) {
+    return Number(data.toString());
+  }
+};
+
+const getGameInfo = (gameId) => {
+  if (gameId) {
+    let gameInfo = [];
+    while (gameId > 0) {
+      const { data } = useContractRead({
+        addressOrName: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
+        contractInterface: abi,
+        functionName: "getGameInfo",
+        args: gameId,
+      });
+      const newData = data.map((i) => {
+        if (ethers.BigNumber.isBigNumber(i)) {
+          i = i.toString();
+        }
+        return i;
+      });
+      newData[7] = gameId;
+      gameInfo.push(newData);
+      gameId--;
+    }
+    const ingGame = gameInfo.filter((i) => i[6] === "1");
+    if (!ingGame.length) {
+      return gameInfo.filter((i) => i[6] === "2");
+    } else {
+      return ingGame;
+    }
+  }
+};
+
 const HomePage: NextPage<{
   info: Tweet[];
   avatars: Array<{ avatar: string }>;
   count: number;
 }> = ({ info, avatars, count }) => {
+  const gameId = getGameId();
+  const gameInfo = getGameInfo(gameId);
+
   return (
     <div className="container">
       <Banner />
-      <FIFA info={info} />
+      <FIFA info={gameInfo} />
       <Info />
       <Ecosystem />
       <Roadmap />

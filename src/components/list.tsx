@@ -10,14 +10,16 @@ import {
   Group,
   UnstyledButton,
 } from "@mantine/core";
+import Link from "next/link";
 import Image from "next/image";
 import { NextPage } from "next";
 import { Tweet } from "src/types";
+import { useRouter } from "next/router";
+import { useBetStyles } from "src/theme";
+
+import GoBack from "./GoBack";
 import StyledTabs from "./StyledTabs";
 import TotalAwardPool from "./TotalAwardPool";
-import { useBetStyles } from "src/theme";
-import Link from "next/link";
-import GoBack from "./GoBack";
 
 const betList = [
   {
@@ -36,15 +38,18 @@ const betList = [
   },
 ];
 
-const Banner = () => {
+const Banner = ({ totalAward }) => {
   const { classes } = useBetStyles();
+  const {
+    query: { betId },
+  } = useRouter();
   return (
     <Stack align="" className={classes.bannerWrap} spacing={48}>
       <Center className={classes.basicBg}>
         <MImage src="/bg.png"></MImage>
       </Center>
       <GoBack />
-      <TotalAwardPool title="THE TOTAL REWAED POOL" value="$ 1,000,356,586,069" />
+      <TotalAwardPool title="THE TOTAL REWAED POOL" value={`$ ${totalAward}`} />
       <Stack align="center" spacing={25}>
         {betList.map((item, index) => {
           return (
@@ -101,7 +106,7 @@ const Banner = () => {
                 <Image src="/flag/flag.png" width={45} height={45}></Image>
               </Group>
               <Group position="right">
-                <Link href={`/bet/${item.id}`}>
+                <Link href={`/bet/${betId}/${item.id}`}>
                   <UnstyledButton>
                     <Image
                       src="/bet/list/button.png"
@@ -131,35 +136,35 @@ const Log = () => {
       position: 58,
       mass: 140.12,
       symbol: "Ce",
-      name: "Cerium",
+      name: "Cerium1",
       visible: false,
     },
     {
       position: 58,
       mass: 140.12,
       symbol: "Ce",
-      name: "Cerium",
+      name: "Cerium2",
       visible: false,
     },
     {
       position: 58,
       mass: 140.12,
       symbol: "Ce",
-      name: "Cerium",
+      name: "Cerium3",
       visible: false,
     },
     {
       position: 58,
       mass: 140.12,
       symbol: "Ce",
-      name: "Cerium",
+      name: "Cerium4",
       visible: false,
     },
     {
       position: 58,
       mass: 140.12,
       symbol: "Ce",
-      name: "Cerium",
+      name: "Cerium5",
       visible: false,
     },
   ];
@@ -231,13 +236,11 @@ const Log = () => {
 };
 
 const BetListPage: NextPage<{
-  tweets: Tweet[];
-  avatars: Array<{ avatar: string }>;
-  count: number;
-}> = ({ tweets, avatars, count }) => {
+  totalAward: string;
+}> = ({ totalAward }) => {
   return (
     <div className="container">
-      <Banner />
+      <Banner totalAward={totalAward} />
       <Log />
       <style jsx>{`
         .container {

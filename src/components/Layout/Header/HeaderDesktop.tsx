@@ -4,10 +4,10 @@ import Link from "next/link";
 import { Logo } from "../../Logo/Logo";
 import useStyles from "./HeaderDesktop.styles";
 import { Group, UnstyledButton } from "@mantine/core";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 
 export function HeaderDesktop() {
   const { classes } = useStyles();
-
   return (
     <div className={classes.header}>
       <div className={classes.mainSection}>
@@ -32,12 +32,14 @@ export function HeaderDesktop() {
           <UnstyledButton className={classes.menuItem}>CLAIM</UnstyledButton>
         </Link>
         <Link href="/">
-          <UnstyledButton className={classes.menuItem}>WHITEPAPER</UnstyledButton>
+          <UnstyledButton className={classes.menuItem}>
+            WHITEPAPER
+          </UnstyledButton>
         </Link>
       </Group>
 
       <Group spacing="lg">
-        <button>Connect wallet</button>
+        <ConnectButton accountStatus="address" chainStatus="icon" showBalance={false}></ConnectButton>
       </Group>
     </div>
   );

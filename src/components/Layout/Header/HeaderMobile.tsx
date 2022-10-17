@@ -49,8 +49,6 @@ export function HeaderMobile({ navbarOpened, toggleNavbar }: HeaderProps) {
           <Logo />
         </div>
         <Group spacing="lg">
-          <Image src="/twitterFill.png" height={28} width={28} />
-          <Image src="/creatordao.png" width={28} height={28} />
           <Burger
             opened={navbarOpened}
             size="sm"

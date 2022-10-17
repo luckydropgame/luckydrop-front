@@ -1,0 +1,343 @@
+[
+  {
+   "inputs": [],
+   "stateMutability": "nonpayable",
+   "type": "constructor"
+  },
+  {
+   "inputs": [
+    {
+     "internalType": "string",
+     "name": "key",
+     "type": "string"
+    },
+    {
+     "internalType": "string",
+     "name": "teamName1",
+     "type": "string"
+    },
+    {
+     "internalType": "string",
+     "name": "teamName2",
+     "type": "string"
+    },
+    {
+     "internalType": "uint256",
+     "name": "startTime",
+     "type": "uint256"
+    },
+    {
+     "internalType": "uint256",
+     "name": "endTime",
+     "type": "uint256"
+    }
+   ],
+   "name": "addGame",
+   "outputs": [
+    {
+     "internalType": "uint256",
+     "name": "",
+     "type": "uint256"
+    }
+   ],
+   "stateMutability": "nonpayable",
+   "type": "function"
+  },
+  {
+   "inputs": [],
+   "name": "adminAddress",
+   "outputs": [
+    {
+     "internalType": "address payable",
+     "name": "",
+     "type": "address"
+    }
+   ],
+   "stateMutability": "view",
+   "type": "function"
+  },
+  {
+   "inputs": [
+    {
+     "internalType": "uint256",
+     "name": "gameId",
+     "type": "uint256"
+    },
+    {
+     "internalType": "string",
+     "name": "team",
+     "type": "string"
+    },
+    {
+     "internalType": "uint256",
+     "name": "amount",
+     "type": "uint256"
+    }
+   ],
+   "name": "bet",
+   "outputs": [],
+   "stateMutability": "payable",
+   "type": "function"
+  },
+  {
+   "inputs": [
+    {
+     "internalType": "uint256",
+     "name": "gameId",
+     "type": "uint256"
+    }
+   ],
+   "name": "claimGameResult",
+   "outputs": [],
+   "stateMutability": "payable",
+   "type": "function"
+  },
+  {
+   "inputs": [
+    {
+     "internalType": "uint256",
+     "name": "",
+     "type": "uint256"
+    }
+   ],
+   "name": "games",
+   "outputs": [
+    {
+     "internalType": "uint256",
+     "name": "id",
+     "type": "uint256"
+    },
+    {
+     "internalType": "string",
+     "name": "key",
+     "type": "string"
+    },
+    {
+     "internalType": "string",
+     "name": "teamName1",
+     "type": "string"
+    },
+    {
+     "internalType": "string",
+     "name": "teamName2",
+     "type": "string"
+    },
+    {
+     "internalType": "string",
+     "name": "result",
+     "type": "string"
+    },
+    {
+     "internalType": "uint256",
+     "name": "startTime",
+     "type": "uint256"
+    },
+    {
+     "internalType": "uint256",
+     "name": "endTime",
+     "type": "uint256"
+    },
+    {
+     "internalType": "uint256",
+     "name": "status",
+     "type": "uint256"
+    }
+   ],
+   "stateMutability": "view",
+   "type": "function"
+  },
+  {
+   "inputs": [],
+   "name": "getGameIds",
+   "outputs": [
+    {
+     "internalType": "uint256",
+     "name": "",
+     "type": "uint256"
+    }
+   ],
+   "stateMutability": "view",
+   "type": "function"
+  },
+  {
+   "inputs": [
+    {
+     "internalType": "uint256",
+     "name": "gameId",
+     "type": "uint256"
+    }
+   ],
+   "name": "getGameInfo",
+   "outputs": [
+    {
+     "internalType": "uint256",
+     "name": "",
+     "type": "uint256"
+    },
+    {
+     "internalType": "uint256",
+     "name": "",
+     "type": "uint256"
+    },
+    {
+     "internalType": "uint256",
+     "name": "",
+     "type": "uint256"
+    },
+    {
+     "internalType": "string",
+     "name": "",
+     "type": "string"
+    },
+    {
+     "internalType": "string",
+     "name": "",
+     "type": "string"
+    },
+    {
+     "internalType": "string",
+     "name": "",
+     "type": "string"
+    },
+    {
+     "internalType": "uint256",
+     "name": "",
+     "type": "uint256"
+    }
+   ],
+   "stateMutability": "view",
+   "type": "function"
+  },
+  {
+   "inputs": [
+    {
+     "internalType": "uint256",
+     "name": "gameId",
+     "type": "uint256"
+    }
+   ],
+   "name": "getUserGameInfo",
+   "outputs": [
+    {
+     "internalType": "uint256",
+     "name": "",
+     "type": "uint256"
+    },
+    {
+     "internalType": "uint256",
+     "name": "",
+     "type": "uint256"
+    },
+    {
+     "internalType": "uint256",
+     "name": "",
+     "type": "uint256"
+    }
+   ],
+   "stateMutability": "view",
+   "type": "function"
+  },
+  {
+   "inputs": [
+    {
+     "internalType": "uint256",
+     "name": "gameId",
+     "type": "uint256"
+    }
+   ],
+   "name": "queryUserClaim",
+   "outputs": [
+    {
+     "internalType": "uint256",
+     "name": "",
+     "type": "uint256"
+    },
+    {
+     "internalType": "uint256",
+     "name": "",
+     "type": "uint256"
+    },
+    {
+     "internalType": "bool",
+     "name": "",
+     "type": "bool"
+    }
+   ],
+   "stateMutability": "view",
+   "type": "function"
+  },
+  {
+   "inputs": [
+    {
+     "internalType": "uint256",
+     "name": "gameId",
+     "type": "uint256"
+    },
+    {
+     "internalType": "string",
+     "name": "winTeam",
+     "type": "string"
+    }
+   ],
+   "name": "setGameResult",
+   "outputs": [
+    {
+     "internalType": "uint256",
+     "name": "",
+     "type": "uint256"
+    }
+   ],
+   "stateMutability": "nonpayable",
+   "type": "function"
+  },
+  {
+   "inputs": [
+    {
+     "internalType": "uint256",
+     "name": "gameId",
+     "type": "uint256"
+    },
+    {
+     "internalType": "uint256",
+     "name": "status",
+     "type": "uint256"
+    }
+   ],
+   "name": "setGameStatus",
+   "outputs": [
+    {
+     "internalType": "uint256",
+     "name": "",
+     "type": "uint256"
+    }
+   ],
+   "stateMutability": "nonpayable",
+   "type": "function"
+  },
+  {
+   "inputs": [
+    {
+     "internalType": "uint256",
+     "name": "amount",
+     "type": "uint256"
+    }
+   ],
+   "name": "withdrawBNB",
+   "outputs": [],
+   "stateMutability": "payable",
+   "type": "function"
+  },
+  {
+   "inputs": [
+    {
+     "internalType": "uint256",
+     "name": "amount",
+     "type": "uint256"
+    }
+   ],
+   "name": "withdrawUSDT",
+   "outputs": [],
+   "stateMutability": "payable",
+   "type": "function"
+  }
+ ]

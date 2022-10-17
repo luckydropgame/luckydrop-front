@@ -1,26 +1,15 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
-  Box,
   Center,
-  Grid,
-  Group,
   Image as MImage,
-  Modal,
   Stack,
   Text,
   UnstyledButton,
-  NumberInput,
-  MantineProvider,
 } from "@mantine/core";
-import Link from "next/link";
-import Image from "next/image";
-import GoBack from "./GoBack";
-import TotalAwardPool from "./TotalAwardPool";
-import { MEDIA_TYPE } from "../common/constants";
-import { useRouter } from "next/router";
 import { NextPage } from "next";
+import { useRouter } from "next/router";
+import TotalAwardPool from "./TotalAwardPool";
 import { useMediaQuery } from "@mantine/hooks";
-import { Variant } from "../types";
 import { useClaimStyles, useSiteStyles } from "../theme";
 
 const Banner = () => {
@@ -32,13 +21,16 @@ const Banner = () => {
         <MImage src="/bg.png"></MImage>
       </Center>
 
-      <TotalAwardPool title="MY INFORMATION" value="MY REWARDS: 453,345,000 USDT" />
+      <TotalAwardPool
+        title="MY INFORMATION"
+        value="MY REWARDS: 453,345,000 USDT"
+      />
       <Center>
         <UnstyledButton
           sx={() => ({
-            width: '140px',
-            height: '45px',
-            borderRadius: '6px',
+            width: "140px",
+            height: "45px",
+            borderRadius: "6px",
             background:
               "-webkit-gradient(linear,0% 4%, 0% 100%, from(#f69e3d), to(#f7710a))",
             "&:hover": {
@@ -49,7 +41,9 @@ const Banner = () => {
             },
           })}
         >
-          <Text align="center" color="#fff" size={20}>CLAIM</Text>
+          <Text align="center" color="#fff" size={20}>
+            CLAIM
+          </Text>
         </UnstyledButton>
       </Center>
     </Stack>
