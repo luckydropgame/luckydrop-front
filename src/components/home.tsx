@@ -16,7 +16,7 @@ import { ethers } from "ethers";
 import { Tweet } from "src/types";
 import TextScroll from "./TextScroll";
 import abi from "src/abi/abi.json";
-import { useContractRead } from "wagmi";
+import { useContractRead, useContractReads } from "wagmi";
 import StyledTabs from "./StyledTabs/index";
 import { useSiteStyles } from "src/theme";
 import { useMediaQuery } from "@mantine/hooks";
@@ -102,16 +102,14 @@ const FIFA = ({ info = [] }) => {
 
   return (
     <Stack spacing={0} className={classes.fifaWrap}>
-      <div className={classes.scrollBar}>
-        <TextScroll content={text} />
-      </div>
+      <TextScroll />
       <Stack
         sx={(theme) => ({
           background: "url('/bg.png') no-repeat",
           backgroundPosition: "left top",
           backgroundSize: "30%",
         })}
-        space={0}
+        spacing={0}
       >
         <Stack
           sx={() => ({
@@ -170,10 +168,7 @@ const FIFA = ({ info = [] }) => {
           </StyledTabs>
         </Stack>
       </Stack>
-
-      <div className={classes.scrollBar}>
-        <TextScroll content={text} />
-      </div>
+      <TextScroll />
     </Stack>
   );
 };
@@ -345,33 +340,18 @@ const getGameId = () => {
   }
 };
 
-const getGameInfo = (gameId) => {
-  if (gameId) {
-    let gameInfo = [];
-    while (gameId > 0) {
-      const { data } = useContractRead({
-        addressOrName: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
-        contractInterface: abi,
-        functionName: "getGameInfo",
-        args: gameId,
-      });
-      const newData = data.map((i) => {
-        if (ethers.BigNumber.isBigNumber(i)) {
-          i = i.toString();
-        }
-        return i;
-      });
-      newData[7] = gameId;
-      gameInfo.push(newData);
-      gameId--;
-    }
-    const ingGame = gameInfo.filter((i) => i[6] === "1");
-    if (!ingGame.length) {
-      return gameInfo.filter((i) => i[6] === "2");
-    } else {
-      return ingGame;
-    }
+const getArgs = (gameId) => {
+  let contractArgs = [];
+  while (gameId > 0) {
+    contractArgs.push({
+      addressOrName: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
+      contractInterface: abi,
+      functionName: "getGameInfo",
+      args: gameId,
+    });
+    gameId--;
   }
+  return contractArgs;
 };
 
 const HomePage: NextPage<{
@@ -380,7 +360,35 @@ const HomePage: NextPage<{
   count: number;
 }> = ({ info, avatars, count }) => {
   const gameId = getGameId();
-  const gameInfo = getGameInfo(gameId);
+  const [gameArgs, setGameArgs] = useState([]);
+  const [gameInfo, setGameInfo] = useState([]);
+
+  useEffect(() => {
+    setGameArgs(getArgs(gameId));
+  }, []);
+
+  useContractReads({
+    contracts: gameArgs,
+    enabled: gameArgs.length > 0 ? true : false,
+    onSuccess: (data) => {
+      const newData = data.map((item) => {
+        const newItem = item.map(i => {
+          if (ethers.BigNumber.isBigNumber(i)) {
+            return i.toString();
+          }
+          return i
+        })
+        newItem[7] = gameId
+        return newItem
+      });
+      const ingGame = newData.filter((i) => i[6] === "1");
+      if (!ingGame.length) {
+        setGameInfo(newData.filter((i) => i[6] === "2"));
+      } else {
+        setGameInfo(ingGame);
+      }
+    },
+  });
 
   return (
     <div className="container">

@@ -200,6 +200,26 @@ export const useSiteStyles = createStyles((theme) => {
       width: "100%",
       backgroundColor: "#7923db",
     },
+    marquee: {
+      background: "#7923db",
+      width: "100vw",
+      boxSizing: "border-box",
+      padding: "10px",
+      color: "white",
+      display: "flex",
+      alignItems: "center",
+      overflow: "hidden",
+    },
+    marqueeContent: {
+      display: "flex",
+      animation: "marquee 20s linear infinite running",
+    },
+    marqueeTag: {
+      display: "inline-flex",
+      alignItems: "center",
+      justifyContent: "center",
+      transition: "all .2s ease",
+    },
   };
 });
 
@@ -386,13 +406,13 @@ export const useDetailStyles = createStyles(() => {
     mainButton: {
       width: "200px",
       height: "54px",
-      borderRadius: '54px',
+      borderRadius: "54px",
       background:
         "-webkit-gradient(linear,0% 4%, 0% 100%, from(#EA861A), to(#F53B19))",
       "&:hover, &:active": {
         background:
           "-webkit-gradient(linear,0% 0%, 0% 50%, from(#EC7E16), to(#F53A19))",
-          boxShadow: '0px 0px 10px #ED7B17'
+        boxShadow: "0px 0px 10px #ED7B17",
       },
     },
   };
@@ -401,9 +421,9 @@ export const useDetailStyles = createStyles(() => {
 export const useClaimStyles = createStyles(() => {
   return {
     bannerWrap: {
-      padding: '90px 0'
-    }
-  }
-})
+      padding: "90px 0",
+    },
+  };
+});
 
 export default theme;
